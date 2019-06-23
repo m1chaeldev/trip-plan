@@ -1,49 +1,67 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from "react-redux";
 import {
     View,
     Text,
     FlatList,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 
-// Style
+// Components
+import ModalEditTrip from "./../../common/components/EditTripModal";
+
+// Styles
 import styles from "./styles";
 
-// Constant
-data = [
-    {
-        name: "Đà lạt tháng 7 cùng đồng bọn tại nhà tui",
-        palaces: [
-            {
-                name: "Cây thông cô đơn",
-                startTime: "7:00",
-                endTime: "8:00",
-                incurredCost: "10000",
-                shouldBring: "Máy ảnh",
-                description: `Đường khó cẩn thận nha mấy thằng loz. Té nhào đầu xuống éo ai cứu đâu hihi`
-            }
-        ],
-        participants: [
-            {
-                name: "Thái Nguyễn",
-                phone: "0332123721"
-            }
-        ]
-    }
-]
+// Actions
+import { tripActions } from "./../../../redux/actions";
 
-export default class App extends React.Component {
+class App extends Component {
     static navigationOptions = {
         header: null,
     };
 
-    handleViewTrip = (index) => {
-        this.props.navigation.navigate("EachTrip", { data, dataIndex: index })
+    constructor(props) {
+        super(props);
+        this.state = {
+            isShowingEditTripModal: false,
+            editingItem: "",
+            editMode: ""
+        };
     }
 
-    handleAddTrip = () => {
-        alert("Add button")
+    closeModal = () => {
+        this.setState({
+            isShowingEditTripModal: false,
+            editingItem: ""
+        })
+    }
+
+    handleViewTrip = (index) => {
+        this.props.navigation.navigate("EachTrip", { data: this.props.data, dataIndex: index })
+    }
+
+    handleEditTrip = (index) => {
+        this.setState({ editingItem: index, editMode: "edit", isShowingEditTripModal: true })
+    }
+
+    handleDeleteTrip = (index) => {
+        const { data } = this.props;
+        const item = data[index];
+        Alert.alert(
+            `Confirm your action`,
+            `Delete "${item.name}"?`,
+            [
+                {
+                    text: 'Cancel',
+                    onPress: null,
+                },
+                { text: 'OK', onPress: () => this.props.deleteTrip(index) },
+            ],
+            { cancelable: false },
+        );
     }
 
     renderItem = ({ item, index }) => (
@@ -51,7 +69,7 @@ export default class App extends React.Component {
         <TouchableOpacity
             onPress={() => this.handleViewTrip(index)}
         >
-            <View style={{ ...styles.itemStyle, paddingBottom: index + 1 === data.length ? 0 : 10 }}>
+            <View style={{ ...styles.itemStyle, paddingBottom: index + 1 === this.props.data.length ? 0 : 10 }}>
                 <View style={styles.itemWrapper}>
                     <View style={styles.itemHeader}>
                         <Text style={styles.itemHeaderText}>{item.name}</Text>
@@ -93,6 +111,38 @@ export default class App extends React.Component {
                                 </Text>
                             </View>
                         </View>
+                        {/* Edit & Delete */}
+                        <View style={{
+                            width: "100%",
+                            height: "auto",
+                            flexDirection: "row",
+                            marginTop: 5
+                        }}>
+                            <View style={{
+                                width: "87%",
+                                height: "auto",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}>
+                                <Text style={{ color: "#e1e1e1" }}>{item.createdTime}</Text>
+                            </View>
+                            <TouchableOpacity onPress={() => this.handleEditTrip(index)}>
+                                <Icon
+                                    style={{}}
+                                    name="ios-create"
+                                    size={25}
+                                    color="#03dac5"
+                                />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => this.handleDeleteTrip(index)}>
+                                <Icon
+                                    style={{ marginLeft: 5 }}
+                                    name="ios-close-circle-outline"
+                                    size={25}
+                                    color="#a4262c"
+                                />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </View>
@@ -100,8 +150,17 @@ export default class App extends React.Component {
     );
 
     render() {
+        const { data } = this.props;
         return (
             <View style={styles.screenWrapper}>
+                <ModalEditTrip
+                    {...this.props}
+                    data={data}
+                    editMode={this.state.editMode}
+                    itemIndex={this.state.editingItem}
+                    visible={this.state.isShowingEditTripModal}
+                    onRequestClose={this.closeModal}
+                />
                 {/* Header */}
                 <View style={styles.headerWrapper}>
                     <Text style={styles.headerTextStyle}>
@@ -117,7 +176,7 @@ export default class App extends React.Component {
                             </Text>
                         </View>
                         <TouchableOpacity
-                            onPress={this.handleAddTrip}
+                            onPress={() => this.setState({ isShowingEditTripModal: true, editMode: "create" })}
                         >
                             <Icon
                                 style={{}}
@@ -142,3 +201,22 @@ export default class App extends React.Component {
         );
     }
 }
+
+const mapActionToProps = {
+    createTrip: tripActions.createTrip,
+    deleteTrip: tripActions.deleteTrip,
+    updateTrip: tripActions.updateTrip,
+    saveModalText: tripActions.saveModalText
+};
+
+const mapStateToProps = state => {
+    return {
+        data: state.trip.data,
+        modalText: state.trip.modalText
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapActionToProps
+)(App);

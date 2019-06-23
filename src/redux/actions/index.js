@@ -1,2 +1,2 @@
-import * as exam from "./exam";
-export { exam };
+import * as tripActions from "./tripActions";
+export { tripActions };
