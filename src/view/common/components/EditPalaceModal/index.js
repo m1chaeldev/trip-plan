@@ -104,7 +104,7 @@ class ModalEditPalace extends React.Component {
                     <TextInput
                         style={styles.inputText}
                         placeholder={item.name || "Nhập vào để thêm"}
-                        placeholderTextColor="#a4262c"
+                        placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
                         multiline={true}
                         value={this.state.palaceName}
@@ -114,7 +114,7 @@ class ModalEditPalace extends React.Component {
                     <TextInput
                         style={styles.inputText}
                         placeholder={item.startTime || "Nhập vào để thêm"}
-                        placeholderTextColor="#a4262c"
+                        placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
                         multiline={true}
                         value={this.state.startTime}
@@ -124,7 +124,7 @@ class ModalEditPalace extends React.Component {
                     <TextInput
                         style={styles.inputText}
                         placeholder={item.endTime || "Nhập vào để thêm"}
-                        placeholderTextColor="#a4262c"
+                        placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
                         multiline={true}
                         value={this.state.endTime}
@@ -134,7 +134,7 @@ class ModalEditPalace extends React.Component {
                     <TextInput
                         style={styles.inputText}
                         placeholder={item.shouldBring || "Nhập vào để thêm"}
-                        placeholderTextColor="#a4262c"
+                        placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
                         multiline={true}
                         value={this.state.shouldBring}
@@ -144,7 +144,7 @@ class ModalEditPalace extends React.Component {
                     <TextInput
                         style={styles.inputText}
                         placeholder={item.description || "Nhập vào để thêm"}
-                        placeholderTextColor="#a4262c"
+                        placeholderTextColor="#e1e1e1"
                         multiline={true}
                         autoCorrect={false}
                         value={this.state.description}
