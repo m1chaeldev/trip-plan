@@ -36,7 +36,9 @@ class ModalEditTrip extends React.Component {
             if (month < 10) month = "0" + month;
             const year = new Date().getFullYear();
             const hours = new Date().getHours();
+            if (hours < 10) hours = "0" + hours;
             const min = new Date().getMinutes();
+            if (min < 10) min = "0" + min;
             const time = `${date}/${month}/${year} (${hours}:${min})`;
             const form = {
                 name: tripName,
