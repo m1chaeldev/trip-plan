@@ -103,7 +103,7 @@ class ModalEditPalace extends React.Component {
                     <Text style={styles.textLabel}>Name:</Text>
                     <TextInput
                         style={styles.inputText}
-                        placeholder={item.name || "Nhập vào để thêm"}
+                        placeholder={item.name || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
                         multiline={true}
@@ -113,7 +113,7 @@ class ModalEditPalace extends React.Component {
                     <Text style={styles.textLabel}>Start time:</Text>
                     <TextInput
                         style={styles.inputText}
-                        placeholder={item.startTime || "Nhập vào để thêm"}
+                        placeholder={item.startTime || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
                         multiline={true}
@@ -123,7 +123,7 @@ class ModalEditPalace extends React.Component {
                     <Text style={styles.textLabel}>End time:</Text>
                     <TextInput
                         style={styles.inputText}
-                        placeholder={item.endTime || "Nhập vào để thêm"}
+                        placeholder={item.endTime || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
                         multiline={true}
@@ -133,7 +133,7 @@ class ModalEditPalace extends React.Component {
                     <Text style={styles.textLabel}>Should bring:</Text>
                     <TextInput
                         style={styles.inputText}
-                        placeholder={item.shouldBring || "Nhập vào để thêm"}
+                        placeholder={item.shouldBring || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
                         multiline={true}
@@ -143,7 +143,7 @@ class ModalEditPalace extends React.Component {
                     <Text style={styles.textLabel}>Description:</Text>
                     <TextInput
                         style={styles.inputText}
-                        placeholder={item.description || "Nhập vào để thêm"}
+                        placeholder={item.description || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
                         multiline={true}
                         autoCorrect={false}

@@ -70,7 +70,7 @@ class ModalEditTrip extends React.Component {
                     <Text style={styles.textLabel}>Name:</Text>
                     <TextInput
                         style={styles.inputText}
-                        placeholder={item.name || "Nhập vào để thêm"}
+                        placeholder={item.name || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
                         multiline={true}
@@ -80,7 +80,7 @@ class ModalEditTrip extends React.Component {
                     <Text style={styles.textLabel}>Phone number:</Text>
                     <TextInput
                         style={styles.inputText}
-                        placeholder={item.phone || "Nhập vào để thêm"}
+                        placeholder={item.phone || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
                         multiline={true}

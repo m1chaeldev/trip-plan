@@ -72,7 +72,7 @@ class ModalEditTrip extends React.Component {
                     <Text style={styles.textLabel}>Name:</Text>
                     <TextInput
                         style={styles.inputText}
-                        placeholder={item.name || "Nhập vào để thêm"}
+                        placeholder={item.name || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
                         multiline={true}
