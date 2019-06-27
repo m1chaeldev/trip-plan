@@ -74,6 +74,16 @@ export default (state = initialState, action) => {
                     }
                 }
             });
+        case "SAVE_TEAM_BUDGET":
+            return update(state, {
+                data: {
+                    [action.payload.index]: {
+                        teamBudget: { $set: action.payload.data.teamBudgetNew },
+                        totalCost: { $set: action.payload.totalCost },
+                        teamBudgetHistory: { $splice: [[0, 0, action.payload.data]] }
+                    }
+                }
+            });
         default:
             return state;
     }

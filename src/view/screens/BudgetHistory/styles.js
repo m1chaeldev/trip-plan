@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+    itemsWrapper: {
+        width: "100%",
+        height: "77.5%"
+    },
     itemStyle: {
         padding: 10,
         paddingTop: 0
@@ -26,7 +30,7 @@ const styles = StyleSheet.create({
     itemBody: {
         width: "100%",
         height: "auto",
-        padding: 10,
+        padding: 5,
         flexDirection: "column",
         borderBottomColor: "#121212",
         borderBottomWidth: 1
@@ -34,15 +38,16 @@ const styles = StyleSheet.create({
     itemBodyTextWrapper: {
         justifyContent: "center",
         alignItems: "center",
-        flexDirection: "row"
+        marginLeft: 5,
+        flexDirection: "row",
     },
     itemBodyText: {
-        color: "#e1e1e1"
-    },
-    itemBodyTextCustom: {
         color: "#bb86fc",
         fontSize: 14,
-        fontWeight: "bold",
+        fontWeight: "bold"
+    },
+    itemBodyTextCustom: {
+        color: "#e1e1e1",
         marginLeft: 5
     },
     screenWrapper: {
@@ -76,49 +81,29 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     addNewBarTextWrapper: {
-        width: "60%",
+        width: "80%",
         height: "auto",
+        justifyContent: "center",
+        alignItems: "center"
     },
     addNewBarTextCustom: {
         color: "#e1e1e1",
         fontSize: 14
     },
-    itemsWrapper: {
+    tabBarWrapper: {
         width: "100%",
-        height: "80.5%"
-    },
-    itemBodyBudget: {
-        paddingHorizontal: 10,
-        paddingVertical: 5
-    },
-    budgetEditBtn: {
-        width: "20%",
         height: "auto",
-        borderRadius: 45,
-        backgroundColor: "#bb86fc",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    budgetEditTextBtn: {
-        textAlign: "center",
-        textTransform: "uppercase",
-        fontSize: 9,
-        color: "#e1e1e1"
-    },
-    itemTeamBudgetTextWrapper: {
-        flexDirection: "row",
+        padding: 10,
+        paddingTop: 0,
         justifyContent: "center",
         alignItems: "center",
-        width: "92%"
+        flexDirection: "row"
     },
-    footerWrapper: {
-        width: "100%",
-        height: "auto",
-        flexDirection: "row",
-        padding: 5,
+    tabBarBtn: {
+        width: "30%",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        padding: 15
     }
 });
 

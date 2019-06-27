@@ -35,16 +35,19 @@ class ModalEditTrip extends React.Component {
             let month = new Date().getMonth() + 1;
             if (month < 10) month = "0" + month;
             const year = new Date().getFullYear();
-            const hours = new Date().getHours();
+            let hours = new Date().getHours();
             if (hours < 10) hours = "0" + hours;
-            const min = new Date().getMinutes();
+            let min = new Date().getMinutes();
             if (min < 10) min = "0" + min;
             const time = `${date}/${month}/${year} (${hours}:${min})`;
             const form = {
                 name: tripName,
                 createdTime: time,
+                teamBudget: "",
+                totalCost: "",
                 palaces: [],
-                participants: []
+                participants: [],
+                teamBudgetHistory: []
             }
             this.props.createTrip(form);
             this.setState({ tripName: "" });
@@ -77,7 +80,8 @@ class ModalEditTrip extends React.Component {
                         placeholder={item.name || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
-                        multiline={true}
+                        maxLength={50}
+                        multiline
                         value={this.state.tripName}
                         onChangeText={(text) => this.setState({ tripName: text })}
                     />

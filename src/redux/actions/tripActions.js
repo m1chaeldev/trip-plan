@@ -79,10 +79,10 @@ export function updateParticipant(payload) {
     }
 }
 
-export function saveModalText(payload) {
+export function saveTeamBudget(payload) {
     return dispatch => {
         dispatch({
-            type: "SAVE_MODAL_TEXT",
+            type: "SAVE_TEAM_BUDGET",
             payload
         })
     }

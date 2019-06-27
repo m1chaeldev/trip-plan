@@ -11,12 +11,14 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 // Components
 import ModalEditTrip from "./../../common/components/EditTripModal";
+import ModalEditTripTeamBudget from "./../../common/components/EditTripTeamBudgetModal";
 
 // Styles
 import styles from "./styles";
 
 // Actions
 import { tripActions } from "./../../../redux/actions";
+import autoMergeLevel1 from 'redux-persist/es/stateReconciler/autoMergeLevel1';
 
 class App extends Component {
     static navigationOptions = {
@@ -27,6 +29,7 @@ class App extends Component {
         super(props);
         this.state = {
             isShowingEditTripModal: false,
+            isShowingEditTripTeamBudgetModal: false,
             editingItem: "",
             editMode: ""
         };
@@ -35,6 +38,7 @@ class App extends Component {
     closeModal = () => {
         this.setState({
             isShowingEditTripModal: false,
+            isShowingEditTripTeamBudgetModal: false,
             editingItem: ""
         })
     }
@@ -45,6 +49,10 @@ class App extends Component {
 
     handleEditTrip = (index) => {
         this.setState({ editingItem: index, editMode: "edit", isShowingEditTripModal: true })
+    }
+
+    handleEditTripTeamBudget = (index) => {
+        this.setState({ editingItem: index, isShowingEditTripTeamBudgetModal: true })
     }
 
     handleDeleteTrip = (index) => {
@@ -64,6 +72,10 @@ class App extends Component {
         );
     }
 
+    formatNumber = (num) => {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")
+    }
+
     renderItem = ({ item, index }) => (
         // Each item
         <TouchableOpacity
@@ -77,12 +89,16 @@ class App extends Component {
                     <View style={styles.itemBody}>
                         {/* Text */}
                         <View style={{ flexDirection: "row" }}>
-                            <Icon
-                                style={{}}
-                                name="ios-bicycle"
-                                size={20}
-                                color="#e1e1e1"
-                            />
+                            <View style={{
+                                width: "7%"
+                            }}>
+                                <Icon
+                                    style={{}}
+                                    name="ios-bicycle"
+                                    size={20}
+                                    color="#e1e1e1"
+                                />
+                            </View>
                             <View style={styles.itemBodyTextWrapper}>
                                 <Text style={styles.itemBodyText}>
                                     All palaces to go:
@@ -96,12 +112,16 @@ class App extends Component {
                         <View style={{
                             flexDirection: "row",
                         }}>
-                            <Icon
-                                style={{}}
-                                name="ios-contact"
-                                size={20}
-                                color="#e1e1e1"
-                            />
+                            <View style={{
+                                width: "7%"
+                            }}>
+                                <Icon
+                                    style={{}}
+                                    name="ios-contact"
+                                    size={20}
+                                    color="#e1e1e1"
+                                />
+                            </View>
                             <View style={styles.itemBodyTextWrapper}>
                                 <Text style={styles.itemBodyText}>
                                     Participants:
@@ -111,38 +131,104 @@ class App extends Component {
                                 </Text>
                             </View>
                         </View>
-                        {/* Edit & Delete */}
-                        <View style={{
-                            width: "100%",
-                            height: "auto",
-                            flexDirection: "row",
-                            marginTop: 5
-                        }}>
+                    </View>
+                    <View style={[styles.itemBody, styles.itemBodyBudget]}>
+                        {/* Text */}
+                        <View style={{ flexDirection: "row" }}>
                             <View style={{
-                                width: "87%",
-                                height: "auto",
-                                justifyContent: "center",
-                                alignItems: "center",
+                                width: "7%"
                             }}>
-                                <Text style={{ color: "#e1e1e1" }}>{item.createdTime}</Text>
-                            </View>
-                            <TouchableOpacity onPress={() => this.handleEditTrip(index)}>
                                 <Icon
                                     style={{}}
-                                    name="ios-create"
-                                    size={25}
-                                    color="#03dac5"
+                                    name="md-wallet"
+                                    size={20}
+                                    color="#e1e1e1"
                                 />
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.handleDeleteTrip(index)}>
-                                <Icon
-                                    style={{ marginLeft: 5 }}
-                                    name="ios-close-circle-outline"
-                                    size={25}
-                                    color="#a4262c"
-                                />
-                            </TouchableOpacity>
+                            </View>
+                            <View style={styles.itemTeamBudgetTextWrapper}>
+                                <View style={{
+                                    width: "59%",
+                                    flexDirection: "row"
+                                }}>
+                                    <Text style={styles.itemBodyText}>
+                                        Team wallet:
+                                </Text>
+                                    <Text style={styles.itemBodyTextCustom}>
+                                        {this.formatNumber(item.teamBudget) || "0"}₫
+                                </Text>
+                                </View>
+                                <TouchableOpacity
+                                    style={{ ...styles.budgetEditBtn }}
+                                    onPress={() => this.handleEditTripTeamBudget(index)}
+                                >
+                                    <Icon
+                                        style={{ marginRight: 5 }}
+                                        name="md-create"
+                                        size={9}
+                                        color="#e1e1e1"
+                                    />
+                                    <Text style={styles.budgetEditTextBtn}>Edit</Text>
+                                </TouchableOpacity>
+                                <View style={{ width: "1%" }}></View>
+                                <TouchableOpacity
+                                    style={styles.budgetEditBtn}
+                                    onPress={() => this.props.navigation.navigate("BudgetHistory", { data: this.props.data, dataIndex: index })}
+                                >
+                                    <Icon
+                                        style={{ marginRight: 5 }}
+                                        name="md-list-box"
+                                        size={9}
+                                        color="#e1e1e1"
+                                    />
+                                    <Text style={styles.budgetEditTextBtn}>History</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
+                    </View>
+                    <View style={{
+                        ...styles.itemBody,
+                        paddingVertical: 5
+                    }}>
+                        {/* Text */}
+                        <View style={{ flexDirection: "row" }}>
+                            <View style={{
+                                ...styles.itemTeamBudgetTextWrapper,
+                                width: "100%"
+                            }}>
+                                <Icon
+                                    style={{ marginRight: 5 }}
+                                    name="md-cash"
+                                    size={20}
+                                    color="#e1e1e1"
+                                />
+                                <Text style={styles.itemBodyText}>
+                                    Total cost:
+                                </Text>
+                                <Text style={styles.itemBodyTextCustom}>
+                                    {this.formatNumber(item.totalCost) || "0"}₫
+                                </Text>
+                            </View>
+                        </View>
+                    </View>
+                    {/* Edit & Delete */}
+                    <View style={styles.footerWrapper}>
+                        <Text style={{ color: "#e1e1e1", marginRight: 5 }}>{item.createdTime}</Text>
+                        <TouchableOpacity onPress={() => this.handleEditTrip(index)}>
+                            <Icon
+                                style={{}}
+                                name="ios-create"
+                                size={25}
+                                color="#03dac5"
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.handleDeleteTrip(index)}>
+                            <Icon
+                                style={{ marginLeft: 5 }}
+                                name="ios-close-circle-outline"
+                                size={25}
+                                color="#a4262c"
+                            />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -159,6 +245,13 @@ class App extends Component {
                     editMode={this.state.editMode}
                     itemIndex={this.state.editingItem}
                     visible={this.state.isShowingEditTripModal}
+                    onRequestClose={this.closeModal}
+                />
+                <ModalEditTripTeamBudget
+                    {...this.props}
+                    data={data}
+                    itemIndex={this.state.editingItem}
+                    visible={this.state.isShowingEditTripTeamBudgetModal}
                     onRequestClose={this.closeModal}
                 />
                 {/* Header */}
@@ -206,7 +299,7 @@ const mapActionToProps = {
     createTrip: tripActions.createTrip,
     deleteTrip: tripActions.deleteTrip,
     updateTrip: tripActions.updateTrip,
-    saveModalText: tripActions.saveModalText
+    saveTeamBudget: tripActions.saveTeamBudget
 };
 
 const mapStateToProps = state => {
