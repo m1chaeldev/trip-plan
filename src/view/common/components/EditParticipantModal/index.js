@@ -84,6 +84,7 @@ class ModalEditTrip extends React.Component {
                         placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
                         multiline={true}
+                        keyboardType="numeric"
                         value={this.state.phone}
                         onChangeText={(text) => this.setState({ phone: text })}
                     />

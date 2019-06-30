@@ -155,6 +155,30 @@ class App extends Component {
                                     alignItems: "center"
                                 }}>
                                     <Icon
+                                        name="md-pin"
+                                        size={20}
+                                        color="#e1e1e1"
+                                    />
+                                </View>
+                                <View style={styles.itemBodyTextWrapper}>
+                                    <Text style={styles.itemBodyText}>
+                                        Address:
+                                </Text>
+                                    <Text style={styles.itemBodyTextCustom}>
+                                        {item.address}
+                                    </Text>
+                                </View>
+                            </View>
+                        </View>
+                        {/* Text */}
+                        <View style={styles.itemBody}>
+                            <View style={{ flexDirection: "row" }}>
+                                <View style={{
+                                    width: 25,
+                                    justifyContent: "center",
+                                    alignItems: "center"
+                                }}>
+                                    <Icon
                                         name="md-time"
                                         size={20}
                                         color="#e1e1e1"
@@ -222,7 +246,7 @@ class App extends Component {
                         <View style={styles.itemBody}>
                             <View style={{ flexDirection: "row" }}>
                                 <Text style={styles.itemBodyTextCustom}>
-                                    {item.description}
+                                    {item.description || "Nothing"}
                                 </Text>
                             </View>
                         </View>

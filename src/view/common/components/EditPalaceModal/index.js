@@ -14,6 +14,7 @@ class ModalEditPalace extends React.Component {
         super(props);
         this.state = {
             palaceName: "",
+            address: "",
             startTime: "",
             endTime: "",
             shouldBring: "",
@@ -23,10 +24,11 @@ class ModalEditPalace extends React.Component {
 
     saveData = (item) => {
         const index = this.props.navigation.state.params.dataIndex;
-        const { palaceName, startTime, endTime, shouldBring, description } = this.state;
+        const { palaceName, startTime, endTime, shouldBring, description, address } = this.state;
         const form = {
             data: {
                 name: palaceName || item.name,
+                address: address || item.address,
                 startTime: startTime || item.startTime,
                 endTime: endTime || item.endTime,
                 shouldBring: shouldBring || item.shouldBring,
@@ -36,7 +38,7 @@ class ModalEditPalace extends React.Component {
             itemIndex: this.props.itemIndex
         }
         this.props.updatePalace(form);
-        this.setState({ palaceName: "", startTime: "", endTime: "", shouldBring: "", description: "" });
+        this.setState({ palaceName: "", address: "", startTime: "", endTime: "", shouldBring: "", description: "" });
         this.props.onRequestClose();
     }
 
@@ -65,11 +67,12 @@ class ModalEditPalace extends React.Component {
 
     createData = () => {
         const index = this.props.navigation.state.params.dataIndex;
-        const { palaceName, startTime, endTime, shouldBring, description } = this.state;
+        const { palaceName, startTime, endTime, shouldBring, description, address } = this.state;
         if (palaceName !== "") {
             const form = {
                 data: {
                     name: palaceName,
+                    address,
                     startTime,
                     endTime,
                     shouldBring,
@@ -79,7 +82,7 @@ class ModalEditPalace extends React.Component {
             }
             this.props.createPalace(form);
         }
-        this.setState({ palaceName: "", startTime: "", endTime: "", shouldBring: "", description: "" });
+        this.setState({ palaceName: "", address: "", startTime: "", endTime: "", shouldBring: "", description: "" });
         this.props.onRequestClose();
     }
 
@@ -109,6 +112,16 @@ class ModalEditPalace extends React.Component {
                         multiline={true}
                         value={this.state.palaceName}
                         onChangeText={(text) => this.setState({ palaceName: text })}
+                    />
+                    <Text style={styles.textLabel}>Address:</Text>
+                    <TextInput
+                        style={styles.inputText}
+                        placeholder={item.address || "Type something to add"}
+                        placeholderTextColor="#e1e1e1"
+                        autoCorrect={false}
+                        multiline={true}
+                        value={this.state.address}
+                        onChangeText={(text) => this.setState({ address: text })}
                     />
                     <Text style={styles.textLabel}>Start time:</Text>
                     <TextInput
