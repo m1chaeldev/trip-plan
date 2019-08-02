@@ -150,7 +150,6 @@ class ModalEditPalace extends React.Component {
                         style={styles.inputText}
                         placeholder={item.name || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
-                        autoFocus
                         autoCorrect={false}
                         value={this.state.palaceName}
                         onChangeText={(text) => this.setState({ palaceName: text })}
