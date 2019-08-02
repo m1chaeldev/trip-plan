@@ -80,8 +80,8 @@ class ModalEditTrip extends React.Component {
                         placeholder={item.name || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
+                        autoFocus
                         maxLength={50}
-                        multiline
                         value={this.state.tripName}
                         onChangeText={(text) => this.setState({ tripName: text })}
                     />

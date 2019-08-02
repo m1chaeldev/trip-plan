@@ -212,7 +212,7 @@ class App extends Component {
                     </View>
                     {/* Edit & Delete */}
                     <View style={styles.footerWrapper}>
-                        <Text style={{ color: "#e1e1e1", marginRight: 5 }}>{item.createdTime}</Text>
+                        <Text style={{ color: "#e1e1e1", marginRight: 5, fontWeight: "100" }}>{item.createdTime}</Text>
                         <TouchableOpacity onPress={() => this.handleEditTrip(index)}>
                             <Icon
                                 style={{}}

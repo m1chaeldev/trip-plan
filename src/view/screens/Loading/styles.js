@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         color: "#bb86fc",
         textTransform: "uppercase",
         fontSize: 20,
-        fontWeight: "bold",
+        fontWeight: "400",
         textAlign: "center"
     },
     addNewBarWrapper: {

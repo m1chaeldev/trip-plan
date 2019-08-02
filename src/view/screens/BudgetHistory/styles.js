@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     itemHeaderText: {
         color: "#bb86fc",
         fontSize: 16,
-        fontWeight: "bold"
+        fontWeight: "400"
     },
     itemBody: {
         width: "100%",
@@ -44,11 +44,12 @@ const styles = StyleSheet.create({
     itemBodyText: {
         color: "#bb86fc",
         fontSize: 14,
-        fontWeight: "bold"
+        fontWeight: "400"
     },
     itemBodyTextCustom: {
         color: "#e1e1e1",
-        marginLeft: 5
+        marginLeft: 5,
+        fontWeight: "100"
     },
     screenWrapper: {
         backgroundColor: "#121212",
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
         color: "#bb86fc",
         textTransform: "uppercase",
         fontSize: 20,
-        fontWeight: "bold",
+        fontWeight: "400",
         textAlign: "center"
     },
     addNewBarWrapper: {
@@ -88,7 +89,8 @@ const styles = StyleSheet.create({
     },
     addNewBarTextCustom: {
         color: "#e1e1e1",
-        fontSize: 14
+        fontSize: 14,
+        fontWeight: "500"
     },
     tabBarWrapper: {
         width: "100%",

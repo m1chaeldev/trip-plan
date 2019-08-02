@@ -73,7 +73,7 @@ class ModalEditTrip extends React.Component {
                         placeholder={item.name || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
-                        multiline={true}
+                        autoFocus
                         value={this.state.userName}
                         onChangeText={(text) => this.setState({ userName: text })}
                     />
@@ -83,7 +83,6 @@ class ModalEditTrip extends React.Component {
                         placeholder={item.phone || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
-                        multiline={true}
                         keyboardType="numeric"
                         value={this.state.phone}
                         onChangeText={(text) => this.setState({ phone: text })}

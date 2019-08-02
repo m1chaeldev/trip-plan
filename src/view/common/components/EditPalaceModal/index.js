@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import Modal from "react-native-modal";
 import styles from "./styles";
+import Icon from "react-native-vector-icons/Ionicons";
 
 class ModalEditPalace extends React.Component {
     constructor(props) {
@@ -32,7 +33,27 @@ class ModalEditPalace extends React.Component {
                 startTime: startTime || item.startTime,
                 endTime: endTime || item.endTime,
                 shouldBring: shouldBring || item.shouldBring,
-                description: description || item.description,
+                description: description || item.description
+            },
+            index,
+            itemIndex: this.props.itemIndex
+        }
+        this.props.updatePalace(form);
+        this.setState({ palaceName: "", address: "", startTime: "", endTime: "", shouldBring: "", description: "" });
+        this.props.onRequestClose();
+    }
+
+    tickPalaceCompleted = (item) => {
+        const index = this.props.navigation.state.params.dataIndex;
+        const form = {
+            data: {
+                name: item.name,
+                address: item.address,
+                startTime: item.startTime,
+                endTime: item.endTime,
+                shouldBring: item.shouldBring,
+                description: item.description,
+                completed: !item.completed
             },
             index,
             itemIndex: this.props.itemIndex
@@ -76,7 +97,8 @@ class ModalEditPalace extends React.Component {
                     startTime,
                     endTime,
                     shouldBring,
-                    description
+                    description,
+                    completed: false
                 },
                 index
             }
@@ -103,13 +125,33 @@ class ModalEditPalace extends React.Component {
                 animationOut="zoomOutUp"
             >
                 <View style={styles.modalWrapper}>
+                    {props.editMode === "edit" && (
+                        <TouchableOpacity
+                            style={{
+                                width: 30,
+                                height: 30,
+                                borderRadius: 45,
+                                marginBottom: 10,
+                                justifyContent: "center",
+                                alignItems: "center",
+                                backgroundColor: item.completed ? "#a4262c" : "#03dac5"
+                            }}
+                            onPress={() => this.tickPalaceCompleted(item)}
+                        >
+                            <Icon
+                                name={item.completed ? "ios-close-circle-outline" : "ios-checkmark-circle-outline"}
+                                size={20}
+                                color="#e1e1e1"
+                            />
+                        </TouchableOpacity>
+                    )}
                     <Text style={styles.textLabel}>Name:</Text>
                     <TextInput
                         style={styles.inputText}
                         placeholder={item.name || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
+                        autoFocus
                         autoCorrect={false}
-                        multiline={true}
                         value={this.state.palaceName}
                         onChangeText={(text) => this.setState({ palaceName: text })}
                     />
@@ -119,29 +161,8 @@ class ModalEditPalace extends React.Component {
                         placeholder={item.address || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
-                        multiline={true}
                         value={this.state.address}
                         onChangeText={(text) => this.setState({ address: text })}
-                    />
-                    <Text style={styles.textLabel}>Start time:</Text>
-                    <TextInput
-                        style={styles.inputText}
-                        placeholder={item.startTime || "Type something to add"}
-                        placeholderTextColor="#e1e1e1"
-                        autoCorrect={false}
-                        multiline={true}
-                        value={this.state.startTime}
-                        onChangeText={(text) => this.setState({ startTime: text })}
-                    />
-                    <Text style={styles.textLabel}>End time:</Text>
-                    <TextInput
-                        style={styles.inputText}
-                        placeholder={item.endTime || "Type something to add"}
-                        placeholderTextColor="#e1e1e1"
-                        autoCorrect={false}
-                        multiline={true}
-                        value={this.state.endTime}
-                        onChangeText={(text) => this.setState({ endTime: text })}
                     />
                     <Text style={styles.textLabel}>Should bring:</Text>
                     <TextInput
@@ -149,7 +170,6 @@ class ModalEditPalace extends React.Component {
                         placeholder={item.shouldBring || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
                         autoCorrect={false}
-                        multiline={true}
                         value={this.state.shouldBring}
                         onChangeText={(text) => this.setState({ shouldBring: text })}
                     />
@@ -158,7 +178,6 @@ class ModalEditPalace extends React.Component {
                         style={styles.inputText}
                         placeholder={item.description || "Type something to add"}
                         placeholderTextColor="#e1e1e1"
-                        multiline={true}
                         autoCorrect={false}
                         value={this.state.description}
                         onChangeText={(text) => this.setState({ description: text })}

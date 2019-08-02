@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     textLabel: {
         color: "#bb86fc",
         fontSize: 16,
-        fontWeight: "bold"
+        fontWeight: "100"
     },
     inputText: {
         backgroundColor: "#1e1e1e",
@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
         color: "#a4262c",
         textAlign: "center",
         marginTop: 5,
-        borderRadius: 45
+        borderRadius: 45,
+        fontWeight: "100"
     },
     btnStyle: {
         backgroundColor: "#03dac5",
@@ -33,7 +34,8 @@ const styles = StyleSheet.create({
         width: "45%",
         justifyContent: "center",
         alignItems: "center",
-        flexDirection: "row"
+        flexDirection: "row",
+        fontWeight: "100"
     }
 });
 

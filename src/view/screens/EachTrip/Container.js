@@ -111,11 +111,12 @@ class App extends Component {
                                 <Text style={{
                                     color: "#e1e1e1",
                                     fontSize: 14,
-                                    fontWeight: "bold",
+                                    fontWeight: "100",
                                     color: "#03dac5"
                                 }}>{item.name}</Text>
                                 <Text style={{
-                                    color: "#e1e1e1"
+                                    color: "#e1e1e1",
+                                    fontWeight: "100",
                                 }}>{item.phone}</Text>
                             </View>
                         </View>
@@ -144,7 +145,10 @@ class App extends Component {
                 <View style={{ ...styles.itemStyle, paddingBottom: index + 1 === data[dataIndex].palaces.length ? 0 : 10 }}>
                     <View style={styles.itemWrapper}>
                         <View style={styles.itemHeader}>
-                            <Text style={styles.itemHeaderText}>{item.name}</Text>
+                            <Text style={{
+                                ...styles.itemHeaderText,
+                                color: item.completed ? "#03dac6" : "#a4262c"
+                            }}> {item.name}</Text>
                         </View>
                         {/* Text */}
                         <View style={styles.itemBody}>
@@ -165,31 +169,7 @@ class App extends Component {
                                         Address:
                                 </Text>
                                     <Text style={styles.itemBodyTextCustom}>
-                                        {item.address}
-                                    </Text>
-                                </View>
-                            </View>
-                        </View>
-                        {/* Text */}
-                        <View style={styles.itemBody}>
-                            <View style={{ flexDirection: "row" }}>
-                                <View style={{
-                                    width: 25,
-                                    justifyContent: "center",
-                                    alignItems: "center"
-                                }}>
-                                    <Icon
-                                        name="md-time"
-                                        size={20}
-                                        color="#e1e1e1"
-                                    />
-                                </View>
-                                <View style={styles.itemBodyTextWrapper}>
-                                    <Text style={styles.itemBodyText}>
-                                        Time:
-                                </Text>
-                                    <Text style={styles.itemBodyTextCustom}>
-                                        {item.startTime} - {item.endTime}
+                                        {item.address || "Empty"}
                                     </Text>
                                 </View>
                             </View>
@@ -213,7 +193,7 @@ class App extends Component {
                                         Should bring:
                                 </Text>
                                     <Text style={styles.itemBodyTextCustom}>
-                                        {item.shouldBring}
+                                        {item.shouldBring || "Empty"}
                                     </Text>
                                 </View>
                             </View>
@@ -246,7 +226,7 @@ class App extends Component {
                         <View style={styles.itemBody}>
                             <View style={{ flexDirection: "row" }}>
                                 <Text style={styles.itemBodyTextCustom}>
-                                    {item.description || "Nothing"}
+                                    {item.description || "Empty"}
                                 </Text>
                             </View>
                         </View>
@@ -327,6 +307,7 @@ class App extends Component {
                         onPress={() => tabSelected !== 1 ? this.setState({ tabSelected: 1 }) : null}
                     >
                         <Text style={{
+                            fontWeight: "100",
                             color: tabSelected === 1 ? "#121212" : "#e1e1e1"
                         }}>Palaces</Text>
                     </TouchableOpacity>
@@ -337,6 +318,7 @@ class App extends Component {
                         onPress={() => tabSelected === 1 ? this.setState({ tabSelected: 2 }) : null}
                     >
                         <Text style={{
+                            fontWeight: "100",
                             color: tabSelected === 1 ? "#e1e1e1" : "#121212"
                         }}>Participants</Text>
                     </TouchableOpacity>
